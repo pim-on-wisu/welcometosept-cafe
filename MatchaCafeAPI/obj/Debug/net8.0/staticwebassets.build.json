@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "5xuB40kEncCoO8vyPaiB55qZUkpm2NdygO8Qc11V2Qc=",
+  "Source": "MatchaCafeAPI",
+  "BasePath": "_content/MatchaCafeAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

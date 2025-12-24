@@ -1,0 +1,15 @@
+<div class="menu-container">
+  <div class="menu-card" *ngFor="let item of menuItems">
+    <img [src]="item.imageUrl" [alt]="item.name" class="card-img">
+    
+    <div class="card-body">
+      <h3>{{ item.name }}</h3>
+      <p class="desc">{{ item.description }}</p>
+      
+      <div class="card-footer">
+        <span class="price">฿{{ item.price }}</span>
+        <button class="btn-add">สั่งเลย</button>
+      </div>
+    </div>
+  </div>
+</div>

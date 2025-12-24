@@ -1,0 +1,6 @@
+@MatchaCafeAPI_HostAddress = http://localhost:5193
+
+GET {{MatchaCafeAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
