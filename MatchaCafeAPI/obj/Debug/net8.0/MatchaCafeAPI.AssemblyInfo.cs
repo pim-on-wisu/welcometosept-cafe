@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MatchaCafeAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+04493682d7f695359fa5bf5965d552bc7138c3ad")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9c8eb005a7e14b201a09bf27ec924378d400ee32")]
 [assembly: System.Reflection.AssemblyProductAttribute("MatchaCafeAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MatchaCafeAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

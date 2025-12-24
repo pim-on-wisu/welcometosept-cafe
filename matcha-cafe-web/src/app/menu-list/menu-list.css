@@ -1,4 +1,3 @@
-/* --- ตัวกระดาษ (ขยายความกว้างขึ้นเพื่อให้วางได้ 4 อัน) --- */
 .menu-container {
   display: flex;
   flex-wrap: wrap;
@@ -97,3 +96,83 @@
   cursor: pointer; 
   font-size: 0.85rem;
 }
+
+/* --- ตะกร้าลอยด้านล่าง (Floating Cart) --- */
+.cart-bar {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #2c5f2d;
+  color: white;
+  padding: 15px 30px;
+  border-radius: 50px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+  z-index: 1000;
+  width: 90%;
+  max-width: 400px;
+  justify-content: space-between;
+}
+
+.total-price { font-weight: bold; font-size: 1.2rem; }
+.btn-checkout {
+  background: white; color: #2c5f2d;
+  border: none; padding: 8px 15px; border-radius: 20px;
+  font-weight: bold; cursor: pointer;
+}
+
+/* --- Popup Modal --- */
+.modal-overlay {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.6); /* ฉากหลังมืด */
+  display: flex; justify-content: center; align-items: center;
+  z-index: 2000;
+  backdrop-filter: blur(3px); /* เบลอฉากหลัง */
+}
+
+.modal-content {
+  background: white; padding: 25px;
+  border-radius: 15px; width: 90%; max-width: 400px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  animation: popUp 0.3s ease-out;
+}
+
+@keyframes popUp {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.option-group { margin-bottom: 15px; }
+.option-group label { display: block; font-weight: bold; margin-bottom: 5px; color: #444; }
+.radio-group { display: flex; gap: 10px; flex-wrap: wrap; }
+select { width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ccc; }
+
+.modal-footer {
+  display: flex; justify-content: flex-end; align-items: center; gap: 10px; margin-top: 20px;
+}
+.current-total { font-size: 1.2rem; font-weight: bold; color: #2c5f2d; margin-right: auto; }
+
+.btn-cancel { background: #ddd; color: #333; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; }
+.btn-confirm { background: #2c5f2d; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; }
+
+/* --- ปรับแต่งไอคอนในตะกร้า --- */
+.cart-info {
+  display: flex;
+  align-items: center; /* จัดให้ไอคอนและข้อความอยู่กึ่งกลางแนวตั้ง */
+  gap: 10px;           /* เว้นระยะห่างระหว่างไอคอนกับข้อความ */
+}
+
+.cart-icon-img {
+  width: 24px;         /* กำหนดขนาดไอคอนตามต้องการ */
+  height: 24px;
+  filter: brightness(0) invert(1); /* เปลี่ยนสีไอคอนเป็นสีขาว (ถ้าไอคอนเดิมเป็นสีดำ) */
+}
+
+.divider {
+  color: rgba(255,255,255,0.5); /* เส้นคั่นสีจางๆ */
+  margin: 0 5px;
+}
+

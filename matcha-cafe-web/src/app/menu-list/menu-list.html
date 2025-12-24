@@ -1,15 +1,110 @@
 <div class="menu-container">
   <div class="menu-card" *ngFor="let item of menuItems">
     <img [src]="item.imageUrl" [alt]="item.name" class="card-img">
-    
     <div class="card-body">
       <h3>{{ item.name }}</h3>
       <p class="desc">{{ item.description }}</p>
-      
       <div class="card-footer">
         <span class="price">฿{{ item.price }}</span>
-        <button class="btn-add">สั่งเลย</button>
+        <button class="btn-add" (click)="openCustomize(item)">สั่งเลย</button>
       </div>
     </div>
+  </div>
+</div>
+
+<div class="cart-bar" *ngIf="cart.cartItems().length > 0">
+  
+  <div class="cart-info">
+    <img src="/images/cart.png" alt="Cart" class="cart-icon-img">
+
+    <span>{{ cart.cartItems().length }} รายการ</span>
+    
+    <span class="divider">|</span>
+
+    <span class="total-price">฿{{ cart.getTotalPrice() }}</span>
+  </div>
+  
+  <button class="btn-checkout" (click)="openCart()">ดูตะกร้า</button>
+</div>
+
+<div class="modal-overlay" *ngIf="selectedItem">
+  <div class="modal-content">
+    
+    <h2>{{ selectedItem.name }}</h2>
+    <p class="base-price">ราคาเริ่มต้น ฿{{ selectedItem.price }}</p>
+
+    <hr>
+
+    <div class="option-group">
+      <label>ความหวาน (Sweetness)</label>
+      <div class="radio-group">
+        <label><input type="radio" name="sweet" [(ngModel)]="sweetnessLevel" [value]="0"> 0%</label>
+        <label><input type="radio" name="sweet" [(ngModel)]="sweetnessLevel" [value]="25"> 25%</label>
+        <label><input type="radio" name="sweet" [(ngModel)]="sweetnessLevel" [value]="50"> 50%</label>
+        <label><input type="radio" name="sweet" [(ngModel)]="sweetnessLevel" [value]="100"> 100%</label>
+      </div>
+    </div>
+
+    <div class="option-group" *ngIf="selectedItem.category === 'Milk'">
+      <label>เลือกนม (Milk Type)</label>
+      <select [(ngModel)]="milkType">
+        <option value="Normal">นมวัวปกติ</option>
+        <option value="Oat">Oat Milk ( +฿15 )</option>
+        <option value="Almond">Almond Milk ( +฿20 )</option>
+      </select>
+    </div>
+
+    <div class="option-group">
+      <label>เกรดมัทฉะ (Matcha Grade)</label>
+      <select [(ngModel)]="matchaGrade">
+        <option value="Standard">Standard</option>
+        <option value="Premium">Premium ( +฿30 )</option>
+        <option value="Ceremonial">Ceremonial ( +฿50 )</option>
+      </select>
+    </div>
+
+    <hr>
+    
+    <div class="modal-footer">
+      <div class="current-total">รวม ฿{{ calculateTotalPrice() }}</div>
+      <button class="btn-cancel" (click)="closeCustomize()">ยกเลิก</button>
+      <button class="btn-confirm" (click)="confirmOrder()">ยืนยันใส่ตะกร้า</button>
+    </div>
+
+  </div>
+</div>
+
+<div class="modal-overlay" *ngIf="showCart">
+  <div class="modal-content cart-modal"> 
+    
+    <h2>รายการที่สั่ง (Your Order)</h2>
+    <hr>
+
+    <div class="cart-list">
+      <div class="cart-item" *ngFor="let item of cart.cartItems(); let i = index">
+        <div class="item-info">
+          <div class="item-name">{{ item.menuName }}</div>
+          <div class="item-opt">{{ item.options }}</div>
+        </div>
+        <div class="item-price">฿{{ item.price }}</div>
+        <button class="btn-remove" (click)="removeItem(i)">❌</button>
+      </div>
+    </div>
+
+    <div class="cart-summary">
+      <div class="grand-total">
+        <span>ยอดสุทธิ</span>
+        <span>฿{{ cart.getTotalPrice() }}</span>
+      </div>
+    </div>
+
+    <hr>
+    
+    <div class="modal-footer">
+      <button class="btn-cancel" (click)="closeCart()">เลือกเมนูต่อ</button>
+      
+      <button class="btn-confirm" (click)="placeOrder()">ชำระเงิน (Pay)</button>
+    </div>
+
   </div>
 </div>
