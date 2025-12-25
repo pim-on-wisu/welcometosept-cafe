@@ -1,3 +1,10 @@
+:root {
+  --matcha-dark: #799351;   /* เขียวเข้ม (ตัวหนังสือ) */
+  --matcha-light: #A9C577;  /* เขียวอ่อน (ปุ่ม/ตกแต่ง) */
+  --cream-bg: #FFFBF0;      /* สีครีม (พื้นหลังการ์ด) */
+  --brown-text: #6D4C41;    /* น้ำตาลอุ่นๆ (ข้อความทั่วไป) */
+  --shadow-soft: 0 8px 24px rgba(121, 147, 81, 0.25);
+}
 .menu-container {
   display: flex;
   flex-wrap: wrap;
@@ -59,22 +66,29 @@
   z-index: -1;
 }
 
-/* --- การ์ดเมนู (ปรับขนาดเล็กลง) --- */
+/* ------ menu card ------ */
 .menu-card {
-  border: 1px solid #eee;
+  /* border: 1px solid #eee;
   border-radius: 12px;
-  
-  /* 👇 ลดความกว้างการ์ดลงเหลือ 210px (เดิม 240px) */
-  /* เพื่อให้: 210px * 4 = 840px + ช่องว่างอีกนิดหน่อย = พอดีหน้าจอ */
   width: 210px; 
-  
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0,0,0,0.05);
   transition: transform 0.2s;
+  background: white; */
+
   background: white;
+  border: 2px solid #f0f0f0;
+  border-radius: 20px; /* มนๆ */
+  width: 220px; 
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
 }
 
-.menu-card:hover { transform: translateY(-5px); }
+.menu-card:hover { 
+transform: translateY(-8px) rotate(2deg); /* เอียงนิดๆ ตอนชี้ */
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
 
 .card-img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; }
 
@@ -85,25 +99,23 @@
 
 .card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; }
 
-.price { font-weight: bold; font-size: 1rem; color: #2c5f2d; }
+.price { font-weight: bold; font-size: 1rem; color: #799351; }
 
 .btn-add { 
-  background-color: #2c5f2d; 
+  background-color: #799351; 
   color: white; 
   border: none; 
-  padding: 6px 12px; /* ลด padding ปุ่ม */
+  padding: 6px 12px; 
   border-radius: 20px; 
   cursor: pointer; 
   font-size: 0.85rem;
 }
+.btn-add:hover { background-color: #A9C577; }
 
 /* --- ตะกร้าลอยด้านล่าง (Floating Cart) --- */
 .cart-bar {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #2c5f2d;
+  position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+  background-color: #799351;
   color: white;
   padding: 15px 30px;
   border-radius: 50px;
@@ -112,16 +124,32 @@
   align-items: center;
   box-shadow: 0 5px 20px rgba(0,0,0,0.3);
   z-index: 1000;
-  width: 90%;
-  max-width: 400px;
+  width: 90%; max-width: 400px;
   justify-content: space-between;
 }
 
-.total-price { font-weight: bold; font-size: 1.2rem; }
+.cart-info {
+  display: flex; align-items: center; gap: 15px; flex-grow: 1;
+}
+.cart-icon-img {
+  width: 28px; height: 28px;
+}
+
+.total-price { font-weight: bold; font-size: 1.2rem; 
+  /* background: rgba(255,255,255,0.2);  */
+  /* padding: 2px 10px; border-radius: 10px */
+}
 .btn-checkout {
-  background: white; color: #2c5f2d;
+  background: white; color: #799351;
   border: none; padding: 8px 15px; border-radius: 20px;
   font-weight: bold; cursor: pointer;
+}
+/* .btn-checkout:active { transform: translateY(4px); box-shadow: none; } */
+.btn-checkout:hover { background-color: rgba(255, 255, 255, 0.884); }
+
+.divider {
+  color: rgba(255,255,255,0.5); /* เส้นคั่นสีจางๆ */
+  margin: 0 5px;
 }
 
 /* --- Popup Modal --- */
@@ -134,45 +162,88 @@
 }
 
 .modal-content {
-  background: white; padding: 25px;
+  background: #fff5fd; padding: 25px;
   border-radius: 15px; width: 90%; max-width: 400px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.2);
   animation: popUp 0.3s ease-out;
 }
 
-@keyframes popUp {
-  from { transform: scale(0.8); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
+/* Washi Tape ตกแต่งหัวกระดาษ */
+.modal-content::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 15px;
+  background: repeating-linear-gradient(45deg, var(--matcha-light), var(--matcha-light) 10px, #fff 10px, #fff 20px);
+  opacity: 0.7;
 }
 
-.option-group { margin-bottom: 15px; }
-.option-group label { display: block; font-weight: bold; margin-bottom: 5px; color: #444; }
-.radio-group { display: flex; gap: 10px; flex-wrap: wrap; }
-select { width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ccc; }
+/* h2 {
+  text-align: center; font-family: 'Mali', cursive; color: var(--brown-text); margin-top: 10px;
+}
+.base-price {
+  text-align: center; font-family: 'Kanit', sans-serif; color: #888; margin-bottom: 20px;
+}
 
+hr { border: none; border-top: 2px dashed #ddd; margin: 20px 0; } */
+
+/* ตัวเลือก (Options) */
+.option-group {
+  background: white; border-radius: 15px; padding: 15px;
+  margin-bottom: 15px; border: 2px solid #eee;
+}
+.option-group label {
+  margin-bottom: 8px; display: block;
+}
+
+select {
+  width: 100%; padding: 10px; border-radius: 10px; border: 1px solid #ddd;
+}
+.radio-group { display: flex; justify-content: space-around; border: none; }
+
+/* ปุ่มท้าย Modal */
 .modal-footer {
-  display: flex; justify-content: flex-end; align-items: center; gap: 10px; margin-top: 20px;
+  display: flex; justify-content: space-between; align-items: center; margin-top: 20px;
 }
-.current-total { font-size: 1.2rem; font-weight: bold; color: #2c5f2d; margin-right: auto; }
+.current-total { font-size: 1.4rem; }
 
-.btn-cancel { background: #ddd; color: #333; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; }
-.btn-confirm { background: #2c5f2d; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; }
-
-/* --- ปรับแต่งไอคอนในตะกร้า --- */
-.cart-info {
-  display: flex;
-  align-items: center; /* จัดให้ไอคอนและข้อความอยู่กึ่งกลางแนวตั้ง */
-  gap: 10px;           /* เว้นระยะห่างระหว่างไอคอนกับข้อความ */
+.btn-cancel {
+  background: #eee; color: black;
+  border-radius: 20px; padding: 10px 20px; border: none; cursor: pointer;
 }
-
-.cart-icon-img {
-  width: 24px;         /* กำหนดขนาดไอคอนตามต้องการ */
-  height: 24px;
-  filter: brightness(0) invert(1); /* เปลี่ยนสีไอคอนเป็นสีขาว (ถ้าไอคอนเดิมเป็นสีดำ) */
+.btn-cancel:hover { background: #ccc; transform: translateY(-3px); }
+.btn-confirm {
+  background: #799351; color: white;
+  border-radius: 20px; padding: 10px 25px; border: none; 
+  font-family: 'Mali', cursive; font-size: 1rem; cursor: pointer;
+  box-shadow: 0 4px 10px rgba(121, 147, 81, 0.4);
 }
+.btn-confirm:hover { background: #A9C577; transform: translateY(-3px); }
 
-.divider {
-  color: rgba(255,255,255,0.5); /* เส้นคั่นสีจางๆ */
-  margin: 0 5px;
+/* Animation */
+@keyframes popUp { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+/* =========================================
+   🛒 6. รายการในตะกร้า (Cart List Items)
+   ========================================= */
+.cart-list { max-height: 250px; overflow-y: auto; }
+.cart-item {
+  background: white; border-radius: 15px; padding: 15px; margin-bottom: 10px;
+  display: flex; justify-content: space-between; align-items: center;
+  /* box-shadow: 0 22px 55px rgba(0,0,0,0.03); */
+  /* border: 1px solid #8D6E63;  */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
+.item-info {
+  text-align: left;  /* 👈 1. สั่งให้ตัวหนังสือชิดซ้าย */
+  flex-grow: 1;      /* 👈 2. สั่งให้กล่องนี้ขยายกินพื้นที่ว่างทั้งหมด (เพื่อดันราคาไปขวาสุด) */
+}
+/* .item-name {justify-content: left; } */
+.item-opt { font-size: 0.8rem; color: #aaa; }
+.item-price { font-weight: bold; margin: 0 10px; }
+.btn-remove { background: none; border: none; cursor: pointer; opacity: 0.5; }
+.btn-remove:hover { opacity: 1; transform: scale(1.2); }
 
+.grand-total {
+  padding: 15px; border-radius: 15px;
+  display: flex; justify-content: space-between;
+  font-size: 1.2rem; font-weight: bold;
+  /* border: 2px dashed var(--matcha-light); */
+}
